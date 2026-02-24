@@ -1,10 +1,35 @@
 // Simulando um banco de dados em memória (um array de objetos)
 let bancoDeDados = [
-    { id: 1, nome: "Admin", email: "admin@email.com" },
-    { id: 2, nome: "Fulano", email: "fulano@teste.com" }
+    { 
+        id: 1, nome: "Admin", 
+        email: "admin@email.com", 
+        senha:"123"
+    },
+    { 
+        id: 2, nome: "Fulano",
+        email: "fulano@teste.com", 
+        senha:"456"
+    },
+     { 
+        id: 3, nome: "roberto",
+        email: "roberto@teste.com", 
+        senha: "123456"
+    }
 ];
 
 class UsuarioModel {
+
+    //login
+    static authenticate(email, senha) {
+    const usuario = bancoDeDados.find(u => u.email === email);
+    
+    if (usuario && usuario.senha == senha) {
+        return usuario;
+    }
+
+    return null;
+}
+
     // Retorna todos os usuários
     static lista() {
         return bancoDeDados;
@@ -13,6 +38,8 @@ class UsuarioModel {
     // Busca um usuário específico pelo ID
     static consultarPorId(id) {
         return bancoDeDados.find(u => u.id === parseInt(id));
+        /*const dados = bancoDeDados.lista.filter(item => item.id == id);
+        return dados;*/
     }
 
     // Adiciona um novo usuário ao array
